@@ -285,7 +285,7 @@
                     <rect key="frame" x="331" y="0.0" width="110" height="235"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gmi-Vo-Cya">
-                            <rect key="frame" x="0.0" y="95" width="110" height="46.5"/>
+                            <rect key="frame" x="0.0" y="95.5" width="110" height="46.5"/>
                             <color key="backgroundColor" red="0.88227540250000003" green="0.88240253930000001" blue="0.88224762680000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="+">
@@ -296,7 +296,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qn-wq-TTz">
-                            <rect key="frame" x="0.0" y="48.5" width="110" height="45.5"/>
+                            <rect key="frame" x="0.0" y="48.5" width="110" height="46"/>
                             <color key="backgroundColor" red="0.88227540250000003" green="0.88240253930000001" blue="0.88224762680000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="-">
@@ -318,7 +318,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0OK-8O-YIh">
-                            <rect key="frame" x="0.0" y="142.5" width="110" height="92.5"/>
+                            <rect key="frame" x="0.0" y="143" width="110" height="92"/>
                             <color key="backgroundColor" red="0.33326935769999999" green="0.7245336175" blue="0.29874962570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                             <state key="normal" title="DONE">

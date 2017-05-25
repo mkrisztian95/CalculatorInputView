@@ -134,28 +134,23 @@ class CalculatorInputView: UIView {
       
       //if an operattor war tapped and before them is existing an other operator
       if !text.isEmpty && Character(text[cursorPosition - 1]).isAnOperator() && tappedCaption.isAnOperator(){
-        text.remove(at: (self.targetTextField.text?.index((self.targetTextField.text?.startIndex)!, offsetBy: cursorPosition - 1))!)
-        text.insert(Character(tappedCaption), at: (self.targetTextField.text?.index((self.targetTextField.text?.startIndex)!, offsetBy: cursorPosition-1))!)
-        self.targetTextField.text = text
+        self.targetTextField.text = text.replacingCharacters(in: text.getrange(cursorPosition - 1, length: 1)!, with: tappedCaption)
         return
       }
       
       //if an operattor war tapped and after them is existing an other operator
       if  cursorPosition < text.characters.count {
         if !text.isEmpty && Character(text[cursorPosition]).isAnOperator() && tappedCaption.isAnOperator()  {
-          text.remove(at: (self.targetTextField.text?.index((self.targetTextField.text?.startIndex)!, offsetBy: cursorPosition))!)
-          text.insert(Character(tappedCaption), at: (self.targetTextField.text?.index((self.targetTextField.text?.startIndex)!, offsetBy: cursorPosition))!)
-          self.targetTextField.text = text
+          self.targetTextField.text = text.replacingCharacters(in: text.getrange(cursorPosition, length: 1)!, with: tappedCaption)
           return
         }
       }
       
       //if the tapped caption is a decimal separator, checking the validity of the numbers after placyng one more decimal separator
       if tappedCaption.isDecimalSeparator() {
-        var text:String = self.targetTextField.text!
         text.insert(Character(tappedCaption), at: (self.targetTextField.text?.index((self.targetTextField.text?.startIndex)!, offsetBy: cursorPosition))!)
-        let arrayNumbers =  text.getNumbersFromString()
-        if !isCorrectlyPlacedDecimalSeparator(numbers: arrayNumbers) {
+        
+        if !isCorrectlyPlacedDecimalSeparator(numbers: text.getNumbersFromString()) {
           return
         }
         
@@ -172,9 +167,10 @@ class CalculatorInputView: UIView {
       
       //checking the last symbol of our's textfield
       if self.targetTextField.text?.characters.last != "." && self.targetTextField.text?.characters.last != "0" {
-        let arrayNumbers =  targetTextField.getNumbersFromTextField()
-        let formattedNumbers:[String] = longNumberFormatter(numbers: arrayNumbers)
+        let formattedNumbers:[String] = longNumberFormatter(numbers: targetTextField.getNumbersFromTextField())
+        
         let operators = getAllOperatorsFromText(text: self.targetTextField.text!)
+        
         self.targetTextField.text = getFormattedText(operators: operators, numbers: formattedNumbers)
       }
       
@@ -322,6 +318,17 @@ fileprivate extension String {
     let start = index(startIndex, offsetBy: r.lowerBound)
     let end = index(startIndex, offsetBy: r.upperBound - r.lowerBound)
     return self[Range(start ..< end)]
+  }
+  
+  
+  func getrange(_ from: Int, length: Int) -> Range<String.Index>? {
+    guard let fromU16 = utf16.index(utf16.startIndex, offsetBy: from, limitedBy: utf16.endIndex), fromU16 != utf16.endIndex else {
+      return nil
+    }
+    let toU16 = utf16.index(fromU16, offsetBy: length, limitedBy: utf16.endIndex) ?? utf16.endIndex
+    guard let from = String.Index(fromU16, within: self),
+      let to = String.Index(toU16, within: self) else { return nil }
+    return from ..< to
   }
 }
 
