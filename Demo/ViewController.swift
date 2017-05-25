@@ -28,7 +28,7 @@ class ViewController: UIViewController, KeyboardDelegate {
   }
   
   func didUpdatedTextFieldResult(result: String) {
-    self.calculatorTextField.text = String(result)
+    self.calculatorTextField.text = result
   }
   
   
