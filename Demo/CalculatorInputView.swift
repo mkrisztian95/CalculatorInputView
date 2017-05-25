@@ -94,6 +94,8 @@ class CalculatorInputView: UIView {
   
   //some operand or operator tapped
   @IBAction func keyTapped(sender: UIButton) {
+    self.delegate?.keyWasTapped(character: tappedCaption)
+    
     self.doneButton.setTitle("=", for: .normal)
     //the caption of the button that was tapped
     guard let tappedCaption = sender.titleLabel!.text else {
@@ -166,17 +168,16 @@ class CalculatorInputView: UIView {
       }
       
       //checking the last symbol of our's textfield
-      if self.targetTextField.text?.characters.last != "." && self.targetTextField.text?.characters.last != "0" {
-        let formattedNumbers:[String] = longNumberFormatter(numbers: targetTextField.getNumbersFromTextField())
-        
-        let operators = getAllOperatorsFromText(text: self.targetTextField.text!)
-        
-        self.targetTextField.text = getFormattedText(operators: operators, numbers: formattedNumbers)
-      }
+      if self.targetTextField.text?.characters.last == "." || self.targetTextField.text?.characters.last == "0" { return }
+      
+      let formattedNumbers:[String] = longNumberFormatter(numbers: targetTextField.getNumbersFromTextField())
+      let operators = getAllOperatorsFromText(text: self.targetTextField.text!)
+      self.targetTextField.text = getFormattedText(operators: operators, numbers: formattedNumbers)
+      
       
     }
     
-    self.delegate?.keyWasTapped(character: tappedCaption)
+    
   }
   
   
