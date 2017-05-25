@@ -147,12 +147,9 @@ class CalculatorInputView: UIView {
       //if the tapped caption is a decimal separator, checking the validity of the numbers after placyng one more decimal separator
       if tappedCaption.isDecimalSeparator() {
         text.insert(Character(tappedCaption), at: (self.targetTextField.text?.index((self.targetTextField.text?.startIndex)!, offsetBy: cursorPosition))!)
-        
-        if !isCorrectlyPlacedDecimalSeparator(numbers: text.getNumbersFromString()) {
-          return
-        }
-        
       }
+      
+      if !isCorrectlyPlacedDecimalSeparator(numbers: text.getNumbersFromString()) { return }
       
       // if triple  zero tapped
       if tappedCaption == "000" {
@@ -342,6 +339,11 @@ extension CalculatorInputView {
 // MARK: - UITextField Extension
 
 fileprivate extension UITextField {
+  
+  open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    return false
+  }
+  
   func getNumbersFromTextField() -> [String] {
     return (self.text?.replacingOccurrences(of: "+", with: ":")
       .replacingOccurrences(of: "x", with: ":")
@@ -350,5 +352,7 @@ fileprivate extension UITextField {
       .replacingOccurrences(of: ",", with: "").components(separatedBy: ":"))!
   }
 }
+
+
 
 
