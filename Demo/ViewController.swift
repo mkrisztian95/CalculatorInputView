@@ -8,13 +8,30 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, KeyboardDelegate {
+  @IBOutlet weak var calculatorTextField: UITextField!
 
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    let keyboardView = CalculatorInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 200))
+    keyboardView.delegate = self
+    keyboardView.setTargedForKeyboard(target: self.calculatorTextField)
+    calculatorTextField.inputView = keyboardView
+    
   }
 
+  func keyWasTapped(character: String) {
+    // some reaction ro key pressing
+  }
+  
+  func didUpdatedTextFieldResult(result: String) {
+    self.calculatorTextField.text = String(result)
+  }
+  
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
