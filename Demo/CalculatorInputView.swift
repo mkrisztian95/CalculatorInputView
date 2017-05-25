@@ -18,22 +18,19 @@ protocol KeyboardDelegate: class {
 private class CalculatorBrain {
 
   class func getresult(expression:String) -> String {
-    var text:String = expression
-    text = text.replacingOccurrences(of: "+", with: " + ")
-      .replacingOccurrences(of: "-", with: " - ")
+    let text:String = expression
       .replacingOccurrences(of: "x", with: " * ")
       .replacingOccurrences(of: "÷", with: " / ")
       .replacingOccurrences(of: ",", with: "")
-    let numericExpression = text
-    let expression = NSExpression(format: numericExpression)
-    let result = expression.expressionValue(with: nil, context: nil) as! NSNumber
+    
+    let result = NSExpression(format: text).expressionValue(with: nil, context: nil) as! NSNumber
     
     let formatter = NumberFormatter()
     formatter.maximumFractionDigits = 4
     formatter.allowsFloats = true
     formatter.numberStyle = .decimal
     formatter.decimalSeparator = "."
-    formatter.string(from: result)
+    
     return formatter.string(from: result)!
     
   }
